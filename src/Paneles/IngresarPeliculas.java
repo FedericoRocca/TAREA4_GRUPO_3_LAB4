@@ -74,7 +74,7 @@ public class IngresarPeliculas extends JPanel {
 					peliculas.setNombre(textFNombre.getText());
 					peliculas.setGenero((Categorias)cbGenero.getSelectedItem());					
 					listModel.addElement(peliculas);
-					
+									
 					textFNombre.setText("");
 					cbGenero.setSelectedIndex(0);
 					TextLabelID.setText(Integer.toString(Peliculas.devuelveProximoID()));
