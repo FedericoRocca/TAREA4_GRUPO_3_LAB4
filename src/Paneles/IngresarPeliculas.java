@@ -2,6 +2,7 @@ package Paneles;
 
 import javax.swing.JPanel;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
 import java.awt.Font;
 import javax.swing.JTextField;
@@ -68,7 +69,7 @@ public class IngresarPeliculas extends JPanel {
 		BtnAceptar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
-				if(!textFNombre.getText().isEmpty() && cbGenero.getSelectedIndex()>0)
+				if(!(textFNombre.getText().isEmpty()) && cbGenero.getSelectedIndex()>0)
 				{				
 					Peliculas peliculas = new Peliculas();					
 					peliculas.setNombre(textFNombre.getText());
@@ -78,6 +79,9 @@ public class IngresarPeliculas extends JPanel {
 					textFNombre.setText("");
 					cbGenero.setSelectedIndex(0);
 					TextLabelID.setText(Integer.toString(Peliculas.devuelveProximoID()));
+				}
+				else {
+					JOptionPane.showMessageDialog(null, "Ingrese nómbre y género de película!", "Error", JOptionPane.ERROR_MESSAGE);
 				}
 			}
 		});

@@ -48,7 +48,7 @@ public class Peliculas {
 ////////////// ToString()//////////
 	
 	public String toString() {
-		return "ID= " + ID + ", Nombre= " + Nombre + ", Genero= " + genero.getNombre();
+		return Nombre + " - " + genero.getNombre() + " - " + ID;
 	}
 	
 	public static int devuelveProximoID() {
