@@ -14,82 +14,88 @@ import javax.swing.JComboBox;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.util.TreeSet;
 import java.awt.event.ActionEvent;
 
 public class IngresarPeliculas extends JPanel {
-	
+
 	private JTextField textFNombre;
 	private DefaultListModel<Peliculas> listModel;
+	private TreeSet<Peliculas> peliculasSet;
 	JComboBox<Categorias> cbGenero;
-	
+
 	public IngresarPeliculas() {
 		setLayout(null);
-		
+
 		JLabel lblID = new JLabel("ID");
 		lblID.setFont(new Font("Trebuchet MS", Font.PLAIN, 18));
 		lblID.setBounds(108, 38, 56, 16);
 		add(lblID);
-		
+
 		JLabel TextLabelID = new JLabel("");
 		TextLabelID.setFont(new Font("Tahoma", Font.BOLD, 13));
 		TextLabelID.setEnabled(false);
 		TextLabelID.setBounds(200, 33, 56, 31);
 		add(TextLabelID);
-		
+
 		TextLabelID.setText(Integer.toString(Peliculas.devuelveProximoID()));
-		
+
 		JLabel lblNombre = new JLabel("Nombre");
 		lblNombre.setFont(new Font("Trebuchet MS", Font.PLAIN, 18));
 		lblNombre.setBounds(85, 83, 91, 31);
 		add(lblNombre);
-		
+
 		JLabel lblGenero = new JLabel("G\u00E9nero");
 		lblGenero.setFont(new Font("Trebuchet MS", Font.PLAIN, 18));
 		lblGenero.setBounds(89, 140, 75, 16);
 		add(lblGenero);
-		
+
 		textFNombre = new JTextField();
 		textFNombre.setFont(new Font("Trebuchet MS", Font.PLAIN, 15));
 		textFNombre.setBounds(200, 89, 131, 22);
 		add(textFNombre);
 		textFNombre.setColumns(10);
-		
+
 		cbGenero = new JComboBox<Categorias>();
 		cbGenero.setBounds(200, 139, 131, 22);
 		add(cbGenero);
-				
+
 		cbGenero.addItem(new Categorias(0, "Seleccione un genero"));
 		cbGenero.addItem(new Categorias(1, "Terror"));
 		cbGenero.addItem(new Categorias(2, "Acción"));
 		cbGenero.addItem(new Categorias(3, "Suspenso"));
 		cbGenero.addItem(new Categorias(4, "Romántica"));
 		cbGenero.addItem(new Categorias(5, "Thriller"));
-		
+
 		JButton BtnAceptar = new JButton("Aceptar");
 		BtnAceptar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				
-				if(!(textFNombre.getText().isEmpty()) && cbGenero.getSelectedIndex()>0)
-				{				
-					Peliculas peliculas = new Peliculas();					
+
+				if (!(textFNombre.getText().isEmpty()) && cbGenero.getSelectedIndex() > 0) {
+					Peliculas peliculas = new Peliculas();
 					peliculas.setNombre(textFNombre.getText());
-					peliculas.setGenero((Categorias)cbGenero.getSelectedItem());					
-					listModel.addElement(peliculas);
-									
+					peliculas.setGenero((Categorias) cbGenero.getSelectedItem());
+					// listModel.addElement(peliculas);
+					peliculasSet.add(peliculas);
+
 					textFNombre.setText("");
 					cbGenero.setSelectedIndex(0);
 					TextLabelID.setText(Integer.toString(Peliculas.devuelveProximoID()));
-				}
-				else {
-					JOptionPane.showMessageDialog(null, "Ingrese nómbre y género de película!", "Error", JOptionPane.ERROR_MESSAGE);
+				} else {
+					JOptionPane.showMessageDialog(null, "Ingrese nómbre y género de película!", "Error",
+							JOptionPane.ERROR_MESSAGE);
 				}
 			}
 		});
-		
+
 		BtnAceptar.setFont(new Font("Trebuchet MS", Font.PLAIN, 17));
 		BtnAceptar.setBounds(67, 216, 155, 31);
-		add(BtnAceptar);	
-			
+		add(BtnAceptar);
+
+	}
+
+	public void GetTreeSet(TreeSet<Peliculas> p) {
+		this.peliculasSet = p;
 	}
 
 	public void setDefaultListModel(DefaultListModel<Peliculas> listModelRecibido) {

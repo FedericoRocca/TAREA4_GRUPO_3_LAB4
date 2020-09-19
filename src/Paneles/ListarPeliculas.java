@@ -10,6 +10,7 @@ import javax.swing.DefaultListModel;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import java.awt.Font;
+import java.util.TreeSet;
 
 //public class ListarPeliculas extends JPanel {
 //
@@ -41,16 +42,18 @@ import java.awt.Font;
 public class ListarPeliculas extends JPanel {
 
 	private JList<Peliculas> list;
+	private TreeSet<Peliculas> peliculasSet;
 	private DefaultListModel<Peliculas> listModel;
-	
+	private static TreeSet<Peliculas> peliculas;
+
 	public ListarPeliculas() {
 		setLayout(null);
-		
+
 		JLabel lblPeliculas = new JLabel("Pel\u00EDculas");
 		lblPeliculas.setFont(new Font("Trebuchet MS", Font.PLAIN, 18));
 		lblPeliculas.setBounds(25, 124, 95, 44);
 		add(lblPeliculas);
-		
+
 		list = new JList<Peliculas>();
 		list.setBounds(112, 13, 323, 280);
 		add(list);
@@ -60,8 +63,20 @@ public class ListarPeliculas extends JPanel {
 		this.listModel = listModelRecibido;
 		list.setModel(this.listModel);
 	}
-	
-	public void ordenarPeliculas() {
-		
+
+	public void GetTreeSet(TreeSet<Peliculas> p) {
+		this.peliculasSet = p;
+		TreesetTolistmodel();
 	}
+
+	private void TreesetTolistmodel() {
+		listModel = new DefaultListModel<Peliculas>();
+		if (peliculasSet != null) {
+			for (Peliculas elem : peliculasSet) {
+				this.listModel.addElement(elem);
+			}
+		}
+		list.setModel(listModel);
+	}
+
 }

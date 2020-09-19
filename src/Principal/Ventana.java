@@ -7,7 +7,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import Clases.Peliculas;
+import Clases.*;
 import Paneles.IngresarPeliculas;
 import Paneles.ListarPeliculas;
 
@@ -17,17 +17,20 @@ import javax.swing.JMenu;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.*;
 
 public class Ventana extends JFrame {
 
 	private JPanel contentPane;
-	private static DefaultListModel<Peliculas> listModel;
+	
+	//private static DefaultListModel<Peliculas> listModel;
+	private static TreeSet<Peliculas> peliculas = new TreeSet<Peliculas>(new ComparadorNombre());
 
 	public Ventana() {
 		setTitle("Programa");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 500, 351);
-		listModel = new DefaultListModel<Peliculas>();
+		//listModel = new DefaultListModel<Peliculas>();
 		
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
@@ -43,7 +46,8 @@ public class Ventana extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				contentPane.removeAll();
 				IngresarPeliculas panel = new IngresarPeliculas();
-				panel.setDefaultListModel(listModel);
+				//panel.setDefaultListModel(listModel);
+				panel.GetTreeSet(peliculas);
 				contentPane.add(panel);
 				contentPane.repaint();
 				contentPane.revalidate();				
@@ -58,7 +62,8 @@ public class Ventana extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				contentPane.removeAll();
 				ListarPeliculas panel = new ListarPeliculas();
-				panel.setDefaultListModel(listModel);
+				//panel.setDefaultListModel(listModel);
+				panel.GetTreeSet(peliculas);
 				contentPane.add(panel);
 				contentPane.repaint();
 				contentPane.revalidate();
