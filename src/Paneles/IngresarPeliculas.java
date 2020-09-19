@@ -81,6 +81,8 @@ public class IngresarPeliculas extends JPanel {
 					textFNombre.setText("");
 					cbGenero.setSelectedIndex(0);
 					TextLabelID.setText(Integer.toString(Peliculas.devuelveProximoID()));
+					JOptionPane.showMessageDialog(null, "Pelicula cargada con éxito!", "Pelicula cargada",
+	                        JOptionPane.PLAIN_MESSAGE);
 				} else {
 					JOptionPane.showMessageDialog(null, "Ingrese nómbre y género de película!", "Error",
 							JOptionPane.ERROR_MESSAGE);
